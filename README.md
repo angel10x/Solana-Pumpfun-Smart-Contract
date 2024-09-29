@@ -6,4 +6,3 @@ This is repository for smart contract of Pump.fun. As a smart contact part of Pu
 ### My contacts
 https://wa.me/13137423660
 https://t.me/HarmoniTechDev
-https://discord.com/users/382102787649175553
