@@ -1,7 +1,18 @@
-## Pump.fun clone: Pumpfun smart contract for pump.fun fork, implemented all main functionalities of pump fun.
-This pumpfun smart contract forked pump.fun, but it's developed to give basic understanding about pump fun. 
-To get whole part of smart contract and backend & frontend, feel free to reach out of me[Whatsapp: https://wa.me/13137423660, Telegram: https://t.me/DevCutup]
-You can also get frontend and backend repository from my github.
+<center><img src="./logo/pumpfunlogo.jpg" width="200"/></center>
+
+## Pump.fun Smart Contract
+Welcome to pumpfunbot or pump.fun smart contract with the same functionality as before, such as adding virtual LP, removing LP, creating Raydium Pool. This is the Rust/Anchor smart contract of pump.fun.
+
+If you're interested in having the Pump.fun smart contract access or have any doubts, please reach out to me through the following contacts:
+
+- <a href="https://t.me/sinniez/">Telegram</a>
+- <a href="https://discordapp.com/users/1114372741672488990">Discord (sinniez)</a>
+
+You can check the tx to Remove vitual LP and Create Raydium Pool in this smart contract with CPI calls.  
+https://explorer.solana.com/tx/4L6MWmtV1ZsT8NFfbtu68ZYyYVbpvZ4iynJhPdZw8jESi28TxwojjTFs88Q5QRdNUb297aWfkKcoYP9Ya8npx8AV?cluster=devnet
+
+###  If you found this helpful, don't forget to <a href="https://github.com/sourlodine">follow</a> me.
+
 
 
 program address
