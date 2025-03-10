@@ -1,21 +1,30 @@
 [package]
-name = "pump"
+name = "pumpfun-forking"
 version = "0.1.0"
 description = "Created with Anchor"
+author = "Harry Anderson"
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "lib"]
-name = "pump"
+name = "pumpfun_forking"
 
 [features]
+default = []
+cpi = ["no-entrypoint"]
 no-entrypoint = []
 no-idl = []
 no-log-ix-name = []
-cpi = ["no-entrypoint"]
-default = []
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+devnet = ["raydium-amm-cpi/devnet"]
+anchor-debug = []
+custom-heap = []
 
 [dependencies]
-anchor-lang = { version="0.29.0", features = ["init-if-needed"] }
-anchor-spl = "0.29.0"
-raydium-contract-instructions = { git = "https://github.com/raydium-io/raydium-contract-instructions.git" }
+anchor-lang = "=0.30.1"
+anchor-spl = { version = "=0.30.1", features = [
+  "associated_token",
+  "token",
+  "metadata",
+] }
+raydium-amm-cpi = { git = "https://github.com/raydium-io/raydium-cpi", package = "raydium-amm-cpi", branch = "anchor-0.30.1" }
