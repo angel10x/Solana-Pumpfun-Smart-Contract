@@ -8,11 +8,6 @@ use anchor_spl::{
 };
 use core::mem::size_of;
 
-use crate::{
-  account::{BondingCurve, GlobalInfo},
-  constants::{BONDING_CURVE_SEED, GLOBAL_INFO_SEED, PUMP_FUN_FEE_SEED, SOL_POOL_SEED},
-};
-
 #[derive(Accounts)]
 pub struct CreatePool<'info> {
   #[account(

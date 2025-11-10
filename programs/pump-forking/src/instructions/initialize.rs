@@ -1,25 +1,26 @@
 use crate::{errors::CustomError, state::*};
 use anchor_lang::prelude::*;
+use anchor_lang::system_program;
 
 pub fn initialize(
     ctx: Context<InitializeCurveConfiguration>,
     fees: f64,
 ) -> Result<()> {
-    let dex_config = &mut ctx.accounts.dex_configuration_account;
-
-    if fees < 0_f64 || fees > 100_f64 {
+    // Validate fee range
+    if !(0.0..=100.0).contains(&fees) {
         return err!(CustomError::InvalidFee);
     }
 
-    let _ = transfer_sol_to_pool(
-        ctx.accounts.admin.to_account_info(),
-        ctx.accounts.global_account.to_account_info(),
-        10000000,
-        ctx.accounts.system_program.to_account_info()
+    // Initialize configuration
+    ctx.accounts.dex_configuration_account.set_inner(CurveConfiguration::new(fees));
 
-    );
-
-    dex_config.set_inner(CurveConfiguration::new(fees));
+    // Optional: Initialize global account with minimum rent if needed
+    // Remove this if global account initialization is handled elsewhere
+    if ctx.accounts.global_account.lamports() == 0 {
+        let initial_funding = 10_000_000;
+        **ctx.accounts.global_account.to_account_info().try_borrow_mut_lamports()? = initial_funding;
+        **ctx.accounts.admin.to_account_info().try_borrow_mut_lamports()? -= initial_funding;
+    }
 
     Ok(())
 }

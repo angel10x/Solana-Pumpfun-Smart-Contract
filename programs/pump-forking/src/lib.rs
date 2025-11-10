@@ -1,15 +1,13 @@
 use anchor_lang::prelude::*;
 
-pub mod account;
-pub mod constants;
+pub mod consts;
 pub mod errors;
-pub mod events;
 pub mod instructions;
-pub mod states;
+pub mod state;
 pub mod utils;
 
 use instructions::*;
-use states::Configuration;
+use state::CurveConfiguration;
 
 declare_id!("BDeQaWDdyQoGDWfvNrrc2ovCKCoxrRyQHZsDAiHuAuHV");
 
@@ -18,8 +16,8 @@ pub mod pumpfun_forking {
 
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>, config: Configuration) -> Result<()> {
-        ctx.accounts.process(config)
+    pub fn initialize(ctx: Context<Initialize>, fees: f64) -> Result<()> {
+        instructions::initialize(ctx, fees)
     }
 
     pub fn create_pool(
@@ -33,16 +31,15 @@ pub mod pumpfun_forking {
     }
 
     pub fn buy(ctx: Context<Buy>, in_amount: u64) -> Result<()> {
-        ctx.accounts.process(in_amount, ctx.bumps.sol_pool)
+        instructions::buy(ctx, in_amount)
     }
 
     pub fn sell(ctx: Context<Sell>, in_amount: u64) -> Result<()> {
-        ctx.accounts.process(in_amount, ctx.bumps.sol_pool)
+        instructions::sell(ctx, in_amount)
     }
 
     /// Initiazlize a swap pool
-    pub fn raydium_integrate(ctx: Context<RaydiumIntegrate>, nonce: u8) -> Result<()> {
-        let opentime = Clock::get()?.unix_timestamp as u64;
-        instructions::initialize(ctx, nonce, opentime)
+    pub fn raydium_migrate(ctx: Context<RaydiumMigrate>, nonce: u8, open_time: u64) -> Result<()> {
+        ctx.accounts.process(nonce, open_time)
     }
 }
